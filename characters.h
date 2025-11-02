@@ -7,11 +7,7 @@ char caracter;
 
 void delchar(string& word, char character){
 	string new_word;
-	for(int i = 0; i < word.length(); i++){
-		if(word[i] != character && word[i] != toupper(character)){
-			new_word+=word[i];
-		}
-	}
+	for(int i = 0; i < word.length(); i++) if(word[i] != character && word[i] != toupper(character))new_word+=word[i];
 	word=new_word;
 }
 	
@@ -19,11 +15,8 @@ int rec_typenum(string& word){
 	int detect=1;	// int
 	while(word[0]=='0'){
 		for(int i=0; i<word.length(); i++){
-			if(i+1!=word.length()){
-				word[i]=word[i+1];
-			} else{
-				word[i]=' ';
-			}
+			if(i+1!=word.length())word[i]=word[i+1];
+			else word[i]=' ';
 		}
 	}
 	if(word.length()>0){
@@ -34,9 +27,7 @@ int rec_typenum(string& word){
 				break;
 			}
 		}
-	} else{
-		detect=0; // it's void
-	}
+	} else detect=0; // it's void
 	return detect;
 }
 
@@ -57,47 +48,26 @@ bool detchar(string& word, char character){
 
 void repchar(string& word, char replaced_char, char new_char){
 	for (int i = 0; i < word.length(); i++) {
-		if(word[i]!=replaced_char&&word[i]!=toupper(replaced_char)){
-			word[i] = word[i];
-		} else if(word[i] == replaced_char){
-			word[i] = new_char;
-		} else if( word[i] == toupper(replaced_char) ){
-			word[i] = toupper(new_char);
-		}
+		if(word[i]!=replaced_char&&word[i]!=toupper(replaced_char)) word[i] = word[i];
+		else if(word[i] == replaced_char) word[i] = new_char;
+		else if( word[i] == toupper(replaced_char) ) word[i] = toupper(new_char);
 	}
 }
 	/* mayus */
-void uppstr(string& word){
-	for (int i = 0; i < word.length(); i++) {
-		word[i]=toupper(word[i]);
-	}
-}
+void uppstr(string& word){for(int i = 0; i < word.length(); i++) word[i]=toupper(word[i]);}
+void uppchar(char& word){word=toupper(word);}
 
-void uppchar(char& word){
-	word=toupper(word);
-}
-	/* pasar a minuscula */
-void lowstr(string& word){
-	for (int i = 0; i < word.length(); i++) {
-		word[i]=tolower(word[i]);
-	}
-}
-
-void lowchar(char& word){
-	word=tolower(word);
-}
+	/* minus */
+void lowstr(string& word){ for (int i = 0; i < word.length(); i++) word[i]=tolower(word[i]); }
+void lowchar(char& word){word=tolower(word);}
 
 	/*
 		read characters
 	*/
 
-void takechar(char& CT){	//take a character
-	CT=getch();
-}
+void takechar(char& CT){CT=getch();} //take a character
 
-char takechar(){		//take and return a character
-	return getch();
-}
+char takechar(){return getch();} //take and return a character
 
 void takeyn(char& WORD){	//read only 'Y' (yes) or 'N' (no) 
 	do{
@@ -134,9 +104,8 @@ void take(string& word){
 	word="";
 	do{
 		caracter=getche();
-		if(caracter!=8){
-			word.push_back(caracter);
-		}else if( word.length()>0){
+		if(caracter!=8) word.push_back(caracter);
+		else if( word.length()>0){
 			cout<<" \b \b";
 			word = word.substr(0, word.length() - 1);
 		}
@@ -208,7 +177,7 @@ void takenum(Number& num, int max_digits){
 			NUM=NUM.substr(0, NUM.length() - 1);
 		}
 	} while( caracter!=13 && (NUM.length()<max_digits || max_digits==0));
-	
+
 	if(NUM=="0") num=0;
 	else{
 		switch( rec_typenum(NUM) ){
@@ -229,11 +198,9 @@ void takenum(Number& num){
 				putch(caracter);
 				NUM.push_back(caracter);
 			}
-		} else{
-			if( NUM.length()>0 ){
-				cout<<"\b \b";
-				NUM=NUM.substr(0, NUM.length() - 1);
-			}
+		}else if( NUM.length()>0 ){
+			cout<<"\b \b";
+			NUM=NUM.substr(0, NUM.length() - 1);
 		}
 	} while(caracter!=13);
 	if(NUM=="0") num=0;
@@ -244,7 +211,6 @@ void takenum(Number& num){
 			case 3: num=stod(NUM);break;
 		}
 	}
-	
 }
 
 	/*
@@ -260,11 +226,9 @@ void takestr(string& WORD){
 				putch(caracter);
 				WORD.push_back(caracter);	
 			}
-		} else{
-			if(WORD.length()>0){
-				cout<<"\b \b";
-				WORD=WORD.substr(0, WORD.length() - 1);
-			}
+		} else if(WORD.length()>0){
+			cout<<"\b \b";
+			WORD=WORD.substr(0, WORD.length() - 1);
 		}
 	} while(caracter!=13 || WORD.length()==0);
 }
@@ -278,11 +242,9 @@ void takestr(string& WORD, int max_digits){
 				putch(caracter);
 				WORD.push_back(caracter);	
 			}
-		} else{
-			if(WORD.length()>0){
-				cout<<"\b \b";
-				WORD=WORD.substr(0, WORD.length() - 1);
-			}
+		} else if(WORD.length()>0){
+			cout<<"\b \b";
+			WORD=WORD.substr(0, WORD.length() - 1);
 		}
 	} while(caracter!=13 || WORD.length()==0);
 }
@@ -296,11 +258,9 @@ void takestr(string& WORD, int max_digits, bool space){
 				putch(caracter);
 				WORD.push_back(caracter);	
 			}
-		} else{
-			if(WORD.length()>0){
-				cout<<"\b \b";
-				WORD=WORD.substr(0, WORD.length() - 1);
-			}
+		} else if(WORD.length()>0){
+			cout<<"\b \b";
+			WORD=WORD.substr(0, WORD.length() - 1);
 		}
 	} while(caracter!=13 || WORD.length()==0);
 }
@@ -309,18 +269,14 @@ void takestr(string& WORD, int max_digits, bool space, bool mayus){
 	WORD="";
 	do{
 		caracter=getch();
-		if(caracter!=8){
-			if((WORD.length()<max_digits||max_digits==0)&&((caracter>='a'&&caracter<='z')||(caracter>='A'&&caracter<='Z')||(caracter==' '&&space))){
-				if(mayus) caracter=toupper(caracter);
-				else caracter=tolower(caracter);
-				putch(caracter);
-				WORD.push_back(caracter);
-			}
-		} else{
-			if(WORD.length()>0){
-				cout<<"\b \b";
-				WORD=WORD.substr(0, WORD.length() - 1);
-			}
+		if(caracter!=8 &&((WORD.length()<max_digits||max_digits==0)&&((caracter>='a'&&caracter<='z')||(caracter>='A'&&caracter<='Z')||(caracter==' '&&space)))){
+			if(mayus) caracter=toupper(caracter);
+			else caracter=tolower(caracter);
+			putch(caracter);
+			WORD.push_back(caracter);
+		} else if(WORD.length()>0){
+			cout<<"\b \b";
+			WORD=WORD.substr(0, WORD.length() - 1);
 		}
 	} while(caracter!=13 || WORD.length()==0);
 }
@@ -336,11 +292,9 @@ void takepasw(string& WORD){
 		if(caracter!=8){
 			putch('*');
 			WORD.push_back(caracter);
-		} else{
-			if(WORD.length()>0){
-				cout<<"\b \b";
-				WORD=WORD.substr(0, WORD.length() - 1);
-			}
+		} else if(WORD.length()>0){
+			cout<<"\b \b";
+			WORD=WORD.substr(0, WORD.length() - 1);
 		}
 	} while(caracter!=13);
 }
@@ -352,11 +306,9 @@ void takepasw(string& WORD, int max_digits){
 		if(caracter!=8){
 			putch('*');
 			WORD.push_back(caracter);
-		} else{
-			if(WORD.length()>0){
-				cout<<"\b \b";
-				WORD=WORD.substr(0, WORD.length() - 1);
-			}
+		} else if(WORD.length()>0){
+			cout<<"\b \b";
+			WORD=WORD.substr(0, WORD.length() - 1);
 		}
 	} while((caracter!=13 && (WORD.length()<max_digits||max_digits==0)) || WORD.length()==0);
 }
@@ -365,15 +317,13 @@ void takepasw(string& WORD, int max_digits, bool mayus){
 	WORD="";
 	do{
 		caracter=getch();
+		if(mayus) caracter=toupper(caracter);
 		if(caracter!=8){
-			if(mayus) caracter=toupper(caracter);
 			putch('*');
 			WORD.push_back(caracter);
-		} else{
-			if(WORD.length()>0){
-				cout<<"\b \b";
-				WORD=WORD.substr(0, WORD.length() - 1);
-			}
+		} else if(WORD.length()>0){
+			cout<<"\b \b";
+			WORD=WORD.substr(0, WORD.length() - 1);
 		}
 	} while((caracter!=13 && (WORD.length()<max_digits||max_digits==0)) || WORD.length()==0);
 }
